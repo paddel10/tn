@@ -2,16 +2,24 @@
 
 'use strict';
 
-var fs = require('fs'),
-  path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+import * as compat from 'appc-compat';
+import updateNotifier from 'update-notifier';
 
-var compat = require('appc-compat');
+import recipes from '../lib/recipes.js';
+import setup from '../lib/setup.js';
+import utils from '../lib/utils.js';
+import kitchen from '../lib/kitchen.js';
 
-var pkg = require('../package.json'),
-  recipes = require('../lib/recipes'),
-  setup = require('../lib/setup'),
-  utils = require('../lib/utils'),
-  kitchen = require('../lib/kitchen');
+var pkg = {};
+var pkgFile = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'package.json');
+try {
+  pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf-8'));
+} catch (err) {
+  throw err;
+}
 
 var args = process.argv.slice(2);
 
@@ -115,7 +123,7 @@ else if (cmd === '-v' || cmd === '--version' || cmd === 'version') {
     var opts = {
       stdio: 'inherit'
     };
-    
+
     if (process.argv.indexOf('--prefer-appc') !== -1) {
         opts.preferAppc = true;
     }
@@ -187,10 +195,7 @@ function displayHelp() {
 function displayBanner(doUpdate) {
 
   if (doUpdate !== false) {
-    require('update-notifier')({
-      packageName: pkg.name,
-      packageVersion: pkg.version
-    });
+    updateNotifier({pkg: pkg}).notify();
   }
 
   // display banner
