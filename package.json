@@ -1,5 +1,6 @@
 {
   "name": "tn",
+  "type": "module",
   "description": "Appcelerator & Titanium CLI wrapper to save you keystrokes.",
   "keywords": [
     "appcelerator",
@@ -11,7 +12,7 @@
     "alloy",
     "cli"
   ],
-  "version": "4.2.1",
+  "version": "5.0.0",
   "author": {
     "name": "Fokke Zandbergen",
     "email": "mail@fokkezb.nl"
@@ -29,10 +30,10 @@
   "preferGlobal": true,
   "dependencies": {
     "appc-compat": "^1.0.3",
-    "colors": "^1.0.3",
-    "fields": "^0.1.23",
-    "underscore": "^1.8.3",
-    "update-notifier": "^0.6.0"
+    "colors": "^1.0.4",
+    "fields": "^0.1.24",
+    "underscore": "^1.13.6",
+    "update-notifier": "^7.0.0"
   },
   "license": "Apache-2.0",
   "bin": "./bin/cli.js",
